@@ -39,6 +39,16 @@ def can_afford_drink(drink)
   end
 end
 
+def can_afford_food(food)
+  if @wallet >= food.price
+    return true
+  else return false
+  end
+end
+
+def reduce_drunkness_level(level)
+  @drunkness_level -= level
+end
 
 
 

@@ -5,6 +5,7 @@ MiniTest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative("../pub_class")
 require_relative("../drink_class")
 require_relative("../customer_class")
+require_relative("../food_class")
 
 class TestPub < MiniTest::Test
 
@@ -21,6 +22,11 @@ class TestPub < MiniTest::Test
     @customer3 = Customer.new("Fred", 1200, 17)
     @customer4 = Customer.new("Sarah", 200, 23)
     @customer5 = Customer.new("Rachel", 3000, 32, 120)
+
+    @food1 = Food.new("burger", 1000, 50)
+    @food2 = Food.new("sandwich", 500, 25)
+    @food3 = Food.new("salad", 750, 40)
+    @food4 = Food.new("nuts", 200, 20)
 
 
   end
@@ -65,6 +71,11 @@ end
   def test_sell_drink()
     assert_equal(true, @pub1.sell_drink(@customer2, @drink3))
   end
+
+  def test_sell_food()
+    assert_equal(true, @pub1.sell_food(@customer5, @food1))
+  end
+
 
 
 end

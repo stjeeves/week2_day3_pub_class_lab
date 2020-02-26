@@ -8,33 +8,44 @@ def initialize(name, till, drinks=[])
   @drinks = drinks
 end
 
-def increase_money(amount)
-  @till += amount
-end
-
-def stock_value()
-  value = 0
-  for drink in @drinks
-    value += drink.price
+  def increase_money(amount)
+    @till += amount
   end
-  return value
-end
 
-def reduce_stock(drink)
-  @drinks.delete(drink)
-end
-
-def sell_drink(customer, drink)
-  if customer.check_age(18) && customer.check_drunkness_level(100) && customer.can_afford_drink(drink)
-    customer.reduce_money(drink.price)
-    increase_money(drink.price)
-    reduce_stock(drink)
-    customer.increase_drunkness_level(drink.alcohol_level)
-    return true
-  else
-    return false
+  def stock_value()
+    value = 0
+    for drink in @drinks
+      value += drink.price
+    end
+    return value
   end
-end
+
+  def reduce_stock(drink)
+    @drinks.delete(drink)
+  end
+
+  def sell_drink(customer, drink)
+    if customer.check_age(18) && customer.check_drunkness_level(100) && customer.can_afford_drink(drink)
+      customer.reduce_money(drink.price)
+      increase_money(drink.price)
+      reduce_stock(drink)
+      customer.increase_drunkness_level(drink.alcohol_level)
+      return true
+    else
+      return false
+    end
+  end
+
+  def sell_food(customer, food)
+    if customer.can_afford_food(food)
+      customer.reduce_money(food.price)
+      customer.reduce_drunkness_level(food.rejuvenation_level)
+      reduce_stock(food)
+      return true
+    else
+      return false
+    end
+  end
 
 
 end
